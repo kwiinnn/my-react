@@ -40,8 +40,9 @@
 			);
 		}
 
-		function App () {
-			const chatMessages = [{
+    function ChatMessages () {
+
+      const array = React.useState([{
 				message: 'hello, cha',
 				sender: 'user',
         id: 'id1'
@@ -57,20 +58,44 @@
         message: "it's fine",
         sender: 'robot',
         id: 'id4'
-      }];
+      }]);
+      const chatMessages = array[0];
+      const setChatMessages = array[1];
 
+      function sendMessage() {
+        setChatMessages([
+          ...chatMessages, 
+          {
+            message: 'imy',
+            sender: 'user',
+            id: crypto.randomUUID()
+          }
+        ]);
+      }
+
+      return (
+      <>
+      <button onClick = {sendMessage} >Send message</button>
+        {chatMessages.map((chatMessage) => {
+          return (
+            <ChatMessage 
+              message = {chatMessage.message}
+              sender = {chatMessage.sender}
+              key = {chatMessage.id}
+            />
+          );
+        })}
+      </>
+      );
+
+    }
+
+		function App () {
 			return (
 				<>
           <ChatInput />
-					{chatMessages.map((chatMessage) => {
-            return (
-              <ChatMessage 
-                message = {chatMessage.message}
-                sender = {chatMessage.sender}
-                key = {chatMessage.id}
-              />
-            );
-          })}
+          <ChatMessages />
+					
 				</>
 			);
 		}
