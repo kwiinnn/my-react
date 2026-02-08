@@ -2,6 +2,7 @@
 <html>
 	<head>
 	<title>Chatbot</title>
+  <link rel="stylesheet" href="styles/chatbot.css">
 	</head>
 	<body>
 	<div class="js-container"></div>
@@ -47,23 +48,27 @@
 
 
 			return (
-			<>
+			<div className="chat-input-container">
 				<input 
 					placeholder="Send a message to Cha" 
-					size="20"
+					size="40"
           onChange={saveInputText}
           value={inputText}
+          className="input-text"
 				/>
 				<button
           onClick={sendMessage}
+          className="send-button"
         >Send</button>
-			</>
+			</div>
 			);
 		}
 
 		function ChatMessage( { message, sender } ) {
 			return (
-				<div>
+				<div className={
+          sender==='user' ? 'message-user': 'message-robot'
+        }>
 					{sender === 'robot' && (
 						<img src="assets/cha.png" width="50px"/>
 					)}
@@ -78,7 +83,7 @@
     function ChatMessages ( {chatMessages} ) {
       
       return (
-      <>
+      <div>
         {chatMessages.map((chatMessage) => {
           return (
             <ChatMessage 
@@ -88,7 +93,7 @@
             />
           );
         })}
-      </>
+      </div>
       );
 
     }
@@ -112,7 +117,7 @@
         id: 'id4'
       }]);
 			return (
-				<>
+				<div className="app-container">
           <ChatInput 
             chatMessages={chatMessages}
             setChatMessages={setChatMessages}
@@ -121,7 +126,7 @@
             chatMessages={chatMessages}
           />
 					
-				</>
+				</div>
 			);
 		}
 		

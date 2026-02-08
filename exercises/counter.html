@@ -14,15 +14,21 @@
 	<script src="https://unpkg.com/supersimpledev/babel.js"></script>
 	<script type="text/babel">
 
-		function Button () {
+		function Button (reset) {
       const [ count, setCount ] = React.useState(0);
 
       function Counter () {
-        setCount(count + 1);
+        setCount(count => count + 1); 
       }
+
+			{reset === 1 && (
+				setCount(count => count = 0)
+			)}
+			console.log(count);
 
       return (
       <>
+
         {count <= 1 && (
           <button
           onClick={Counter}
@@ -37,11 +43,33 @@
       );
 		}
 
+    function ResetButton (reset) {
+			function reset () {
+				reset = 1;
+			}
+      
+			return (
+				<>
+					<button
+						onClick={reset}
+					>Reset</button>
+				</>
+			);
+    }
+
 		function App () {
+			const reset = 0;
 			return (
 			<> 
-				<Button/>
-        <Button/>
+				<Button
+					reset={reset}
+				/>
+        <Button
+					reset={reset}
+				/>
+				<ResetButton
+					reset={reset}
+				/>
 			</>
 			);
 		};
