@@ -70,20 +70,30 @@
           sender==='user' ? 'message-user': 'message-robot'
         }>
 					{sender === 'robot' && (
-						<img src="assets/cha.png" width="50px"/>
+						<img src="assets/cha.png" className="chat-message-profile"/>
 					)}
+          <div className="chat-message-text">
 					{message}
+          </div>
 					{sender === 'user' && (
-						<img src="assets/user.png" width="50px"/>
+						<img src="assets/user.png" className="chat-message-profile"/>
 					)}
 				</div>
 			);
 		}
 
     function ChatMessages ( {chatMessages} ) {
+      const chatMessagesRef = React.useRef(null);
+      React.useEffect(() => {
+        const containerElem = chatMessagesRef.current
+        if (containerElem) {
+          containerElem.scrollTop = containerElem.scrollHeight;
+        }
+      }, [chatMessages]);
       
       return (
-      <div>
+      <div className="chat-messages-container"
+        ref={chatMessagesRef}>
         {chatMessages.map((chatMessage) => {
           return (
             <ChatMessage 
@@ -118,12 +128,12 @@
       }]);
 			return (
 				<div className="app-container">
+          <ChatMessages 
+            chatMessages={chatMessages}
+          />
           <ChatInput 
             chatMessages={chatMessages}
             setChatMessages={setChatMessages}
-          />
-          <ChatMessages 
-            chatMessages={chatMessages}
           />
 					
 				</div>
