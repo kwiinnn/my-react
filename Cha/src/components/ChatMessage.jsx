@@ -1,8 +1,12 @@
 import RobotProfileImage from '../assets/cha.png'
 import UserProfileImage from '../assets/user.png'
+import dayjs from 'dayjs';
 import './ChatMessage.css';
 
-export function ChatMessage( { message, sender } ) {
+export function ChatMessage( { message, sender, time } ) {
+
+  const formattedTime = dayjs(time).format('h:mma');
+
   return (
     <div className={
       sender==='user' ? 'message-user': 'message-robot'
@@ -16,6 +20,7 @@ export function ChatMessage( { message, sender } ) {
       {sender === 'user' && (
         <img src={UserProfileImage} className="chat-message-profile"/>
       )}
+      {formattedTime}
     </div>
   );
 }
