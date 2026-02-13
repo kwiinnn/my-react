@@ -16,11 +16,15 @@ export function ChatMessage( { message, sender, time } ) {
       )}
       <div className="chat-message-text">
       {message}
+      <span className='chat-time'>
+        {formattedTime}
+      </span>
       </div>
       {sender === 'user' && (
         <img src={UserProfileImage} className="chat-message-profile"/>
       )}
-      {formattedTime}
+      
+      
     </div>
   );
 }
