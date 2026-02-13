@@ -37,11 +37,11 @@ export function ChatInput( {chatMessages, setChatMessages} ) {
   return (
   <div className="chat-input-container">
     <input 
+      className="input-text"
       placeholder="Send a message to Cha" 
       size="40"
       onChange={saveInputText}
       value={inputText}
-      className="input-text"
     />
     <button
       onClick={sendMessage}

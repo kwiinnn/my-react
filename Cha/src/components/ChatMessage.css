@@ -1,13 +1,3 @@
-
-.input-text {
-  padding: 12px;
-  border-radius: 10px;
-  border: solid 1px gray;
-  margin-bottom: 10px;
-  font-size: 15px;
-  flex-grow: 1;
-}
-
 .message-user, .message-robot {
   display: flex;
   align-items: start;
