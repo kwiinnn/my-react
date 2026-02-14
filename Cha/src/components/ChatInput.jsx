@@ -6,11 +6,14 @@ import './ChatInput.css';
 export function ChatInput( {chatMessages, setChatMessages} ) {
   const [inputText, setInputText ] = useState('');
 
+  const isInputEmpty = inputText.trim() === ''
+
   function saveInputText (event) {
     setInputText(event.target.value);
   }
 
   function sendMessage() {
+    if (isInputEmpty) return;
 
     const timestamp = dayjs().valueOf();
     const newChatMessages = [...chatMessages, 
@@ -51,6 +54,7 @@ export function ChatInput( {chatMessages, setChatMessages} ) {
     <button
       onClick={sendMessage}
       className="send-button"
+      disabled={isInputEmpty}
     >Send</button>
   </div>
   );
