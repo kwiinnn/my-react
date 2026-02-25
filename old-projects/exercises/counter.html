@@ -1,81 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head>
-	<title>React Basics</title>
-	</head>
-	<body>
-	<div class="js-container"></div>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
 
-	<script src="react-basics.js"></script>
+    <script src="react-basics.js"></script>
 
-	<script src="https://unpkg.com/supersimpledev/react.js"></script>
-	<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
-	<script src="https://unpkg.com/supersimpledev/babel.js"></script>
-	<script type="text/babel">
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      function Button(reset) {
+        const [count, setCount] = React.useState(0);
 
-		function Button (reset) {
-      const [ count, setCount ] = React.useState(0);
+        function Counter() {
+          setCount((count) => count + 1);
+        }
 
-      function Counter () {
-        setCount(count => count + 1); 
+        {
+          reset === 1 && setCount((count) => (count = 0));
+        }
+        console.log(count);
+
+        return (
+          <>
+            {count <= 1 && (
+              <button onClick={Counter}>Clicked {count} time</button>
+            )}
+            {count > 1 && (
+              <button onClick={Counter}>Clicked {count} times</button>
+            )}
+          </>
+        );
       }
 
-			{reset === 1 && (
-				setCount(count => count = 0)
-			)}
-			console.log(count);
+      function ResetButton(reset) {
+        function reset() {
+          reset = 1;
+        }
 
-      return (
-      <>
+        return (
+          <>
+            <button onClick={reset}>Reset</button>
+          </>
+        );
+      }
 
-        {count <= 1 && (
-          <button
-          onClick={Counter}
-          >Clicked {count} time</button>
-        )}
-        {count > 1 && (
-          <button
-          onClick={Counter}
-          >Clicked {count} times</button>
-        )} 
-      </>
-      );
-		}
+      function App() {
+        const reset = 0;
+        return (
+          <>
+            <Button reset={reset} />
+            <Button reset={reset} />
+            <ResetButton reset={reset} />
+          </>
+        );
+      }
 
-    function ResetButton (reset) {
-			function reset () {
-				reset = 1;
-			}
-      
-			return (
-				<>
-					<button
-						onClick={reset}
-					>Reset</button>
-				</>
-			);
-    }
-
-		function App () {
-			const reset = 0;
-			return (
-			<> 
-				<Button
-					reset={reset}
-				/>
-        <Button
-					reset={reset}
-				/>
-				<ResetButton
-					reset={reset}
-				/>
-			</>
-			);
-		};
-		
-		const container = document.querySelector('.js-container');
-		ReactDOM.createRoot(container).render(<App/>);
-	</script>
-	</body>
+      const container = document.querySelector(".js-container");
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
 </html>
